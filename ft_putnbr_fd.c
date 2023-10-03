@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 23:08:32 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/27 23:08:32 by melfersi         ###   ########.fr       */
+/*   Created: 2023/10/03 15:29:46 by melfersi          #+#    #+#             */
+/*   Updated: 2023/10/03 15:29:46 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <libft.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*p_src;
+	long	num;
+	long	div;
 
-	p_src = (char *)src;
-	while (*p_src && size > 1)
+	if (!n)
 	{
-		*dst = *p_src;
-		dst++;
-		p_src++;
-		size--;
+		ft_putchar_fd('0', fd);
+		return ;
 	}
-	if (size)
-		*dst = '\0';
-	return (ft_strlen(src));
+	num = n;
+	div = 1;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		num *= (-1);
+	}
+	while (num / div != 0)
+		div *= 10;
+	div /= 10;
+	while (div)
+	{
+		ft_putchar_fd((num / div) + '0', fd);
+		num %= div;
+		div /= 10;
+	}
 }

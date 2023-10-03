@@ -36,7 +36,16 @@
   "C_Cpp_Runner.useAddressSanitizer": false,
   "files.associations": {
     "*.html": "html",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "cmath": "c",
+    "limits": "c",
+    "*.tcc": "c",
+    "tuple": "c",
+    "type_traits": "c",
+    "libft.h": "c",
+    "string.h": "c",
+    "stdio.h": "c",
+    "stdlib.h": "c"
   },
   "42header.username": "melfersi"
 }
