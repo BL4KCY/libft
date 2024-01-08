@@ -3,60 +3,75 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+         #
+#    By: melfersi <melfersi@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/04 22:19:58 by melfersi          #+#    #+#              #
-#    Updated: 2023/10/04 22:19:58 by melfersi         ###   ########.fr        #
+#    Created: 2023/11/01 10:12:32 by melfersi          #+#    #+#              #
+#    Updated: 2024/01/08 09:56:45 by melfersi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler and Flags and diractorys
-CC = cc
+# command and their flags
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
-SRCDIR = ./src
-INCDIR = ./includes
-OBJDIR = ./obj
-SRCDIR_BONUS = ./bonus
-OBJDIR_BONUS = ./obj_bonus
-AR = ar crs
-SOURCES = $(wildcard $(SRCDIR)/*.c)
+CC = cc
+AR = ar -crs
+INCLUDES = includes
 
-OBJECTS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
+#diractories
+OBJ_DIR = obj
+BDIR_OB = bns_obj
+SRC_DIR  = src
+BNS_DIR = bonus
+INCLUDES = includes
 
-BONUS_SOURCES = $(wildcard $(SRCDIR_BONUS)/*.c)
+#file names
+FIlES = ft_atoi.c ft_calloc.c ft_isalpha.c ft_isdigit.c ft_itoa.c ft_memcmp.c\
+		ft_memmove.c ft_putchar_fd.c ft_putnbr_fd.c ft_split.c ft_strdup.c ft_strjoin.c\
+		ft_strlcpy.c ft_strmapi.c ft_strnstr.c ft_strtrim.c ft_tolower.c ft_bzero.c\
+		ft_isalnum.c ft_isascii.c ft_isprint.c ft_memchr.c ft_memcpy.c ft_memset.c\
+		ft_putendl_fd.c ft_putstr_fd.c ft_strchr.c ft_striteri.c ft_strlcat.c ft_strlen.c\
+		ft_strncmp.c ft_strrchr.c ft_substr.c ft_toupper.c
 
-BONUS_OBJECTS = $(patsubst $(SRCDIR_BONUS)/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SOURCES))
+BONUS_FIlES = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c\
+				ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+
+#patterns subs
+SOURCES = $(FIlES:ft_%.c=$(SRC_DIR)/ft_%.c)
+
+BONUS_SOURCES = $(BONUS_FIlES:ft_%.c=$(BNS_DIR)/ft_%.c)
+
+OBJECTS = $(SOURCES:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+BONUS_OBJECTS = $(BONUS_SOURCES:$(BNS_DIR)%.c=$(BDIR_OB)%.o)
 
 # static library name
 NAME = libft.a
 
 # Rules
-all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	$(AR) $@ $^
+$(NAME):$(OBJECTS)
 
 bonus: $(BONUS_OBJECTS)
-	$(AR) $(NAME) $^
 
-# rule to make object file from $(SRCDIR)
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c -I$(INCDIR) -o $@ $<
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -I$(INCLUDES) -o $@
+	$(AR) $(NAME) $@
 
-# rule to make object file from $(SRCDIR_BONUS)
-$(OBJDIR_BONUS)/%.o: $(SRCDIR_BONUS)/%.c
-	mkdir -p $(OBJDIR_BONUS)
-	$(CC) $(CFLAGS) -c -I$(INCDIR) -o $@ $<
+$(BDIR_OB)/%.o:$(BNS_DIR)/%.c
+	@mkdir -p $(BDIR_OB)
+	$(CC) $(CFLAGS) -c $< -I$(INCLUDES) -o $@
+	$(AR) $(NAME) $@
 
 clean:
-	$(RM) $(OBJDIR)
-	$(RM) $(OBJDIR_BONUS)
+	$(RM) $(OBJ_DIR)
+	$(RM) $(BDIR_OB)
 
 fclean: clean
 	$(RM) $(NAME)
 
+all: $(NAME) bonus
+
 re: fclean all
 
-.PHONY: all clean fclean re $(NAME) bonus
+.PHONY: clean

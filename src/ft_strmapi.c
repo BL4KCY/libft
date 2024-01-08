@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 02:39:01 by melfersi          #+#    #+#             */
-/*   Updated: 2023/10/03 02:39:01 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:11:11 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:11:11 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	len;
 	size_t	index;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	strout = (char *)malloc(sizeof(char) * (len + 1));
 	if (strout == NULL)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 15:18:19 by melfersi          #+#    #+#             */
-/*   Updated: 2023/10/03 15:18:19 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:10:08 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:10:08 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s || fd < 0)
+		return ;
 	while (*s)
 		ft_putchar_fd(*s++, fd);
 }

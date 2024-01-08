@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:53:42 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/28 12:53:42 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:08:48 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:08:48 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*s1_ptr;
-	unsigned char	*s2_ptr;
+	t_byte	*s1_ptr;
+	t_byte	*s2_ptr;
 
-	s1_ptr = (unsigned char *)s1;
-	s2_ptr = (unsigned char *)s2;
+	if (!n || s1 == s2)
+		return (0);
+	s1_ptr = (t_byte *)s1;
+	s2_ptr = (t_byte *)s2;
 	while (n > 0)
 	{
-		if (*s1_ptr != *s2_ptr)
-		{
-			if (*s1_ptr > *s2_ptr)
-				return (1);
-			else
-				return (-1);
-		}
+		if (*s1_ptr++ != *s2_ptr++)
+			return (*--s1_ptr - *--s2_ptr);
 		n--;
-		s1_ptr++;
-		s2_ptr++;
 	}
 	return (0);
 }

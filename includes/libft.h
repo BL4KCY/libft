@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 20:17:36 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/26 20:17:36 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:12:18 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:12:18 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }t_list;
+
+typedef unsigned char	t_byte;
 
 int		ft_isalpha(int c);
 

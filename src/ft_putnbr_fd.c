@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 15:29:46 by melfersi          #+#    #+#             */
-/*   Updated: 2023/10/03 15:29:46 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:09:57 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:09:57 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ void	ft_putnbr_fd(int n, int fd)
 	long	num;
 	long	div;
 
-	if (!n)
-	{
-		ft_putchar_fd('0', fd);
+	if (fd < 0)
 		return ;
-	}
 	num = n;
 	div = 1;
 	if (n < 0)
@@ -29,9 +26,8 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd('-', fd);
 		num *= (-1);
 	}
-	while (num / div != 0)
+	while (div * 10 <= num)
 		div *= 10;
-	div /= 10;
 	while (div)
 	{
 		ft_putchar_fd((num / div) + '0', fd);

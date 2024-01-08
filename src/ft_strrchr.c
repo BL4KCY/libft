@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 03:56:41 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/28 03:56:41 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:11:42 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:11:42 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*s_ptr;
+	int	i;
 
-	s_ptr = (char *)s;
-	while (*s)
-		s++;
-	while (*s_ptr != *s)
+	i = ft_strlen(s);
+	while (0 <= i)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s--;
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i--;
 	}
-	if (*s == c)
-		return ((char *)s);
 	return (NULL);
 }

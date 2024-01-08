@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 14:48:14 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/30 14:48:14 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:10:25 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:10:25 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,45 @@ static void	copy(const char *s, char *world, size_t start, size_t word_len)
 	world[index] = 0;
 }
 
-static void	split_string(char **sout, size_t word_cout, const char *s, char c)
+static void	set(size_t *a, size_t *b, size_t *c)
+{
+	*a = 0;
+	*b = 0;
+	*c = 0;
+}
+
+static int	split_string(char **sout, size_t word_cout, const char *s, char c)
 {
 	size_t	index;
 	size_t	i;
 	size_t	word_len;
 
-	i = 0;
-	index = 0;
-	word_len = 0;
+	set(&index, &i, &word_len);
 	while (index < word_cout)
 	{
 		while (s[i] == c)
 			i++;
-		while (s[i] != c && s[i])
-		{
+		while (s[i++] != c)
 			word_len++;
-			i++;
-		}
 		sout[index] = (char *)malloc(sizeof(char) * (word_len + 1));
 		if (sout[index] == NULL)
-			return ;
-		copy(s, sout[index], i - word_len, word_len);
-		index++;
+		{
+			while (0 < index)
+				free(sout[--index]);
+			return (0);
+		}
+		copy(s, sout[index++], --i - word_len, word_len);
 		word_len = 0;
 	}
 	sout[index] = 0;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	size_t	word_count;
 	char	**str_out;
+	int		status;
 
 	if (s == NULL)
 		return (NULL);
@@ -85,6 +92,11 @@ char	**ft_split(char const *s, char c)
 	str_out = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (str_out == NULL)
 		return (NULL);
-	split_string(str_out, word_count, s, c);
+	status = split_string(str_out, word_count, s, c);
+	if (!status)
+	{
+		free(str_out);
+		return (NULL);
+	}
 	return (str_out);
 }

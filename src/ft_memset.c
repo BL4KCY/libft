@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 19:05:28 by melfersi          #+#    #+#             */
-/*   Updated: 2023/09/26 19:05:28 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:09:27 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:09:27 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t				i;
-	char				*str;
+	t_byte	*str;
 
-	i = 0;
-	str = (char *)s;
-	while (i < n)
-		str[i++] = c;
+	str = (t_byte *)s;
+	while (n-- > 0)
+		*str++ = c;
 	return (s);
 }

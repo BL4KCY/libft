@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: melfersi <melfersi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 02:31:21 by melfersi          #+#    #+#             */
-/*   Updated: 2023/10/05 02:31:21 by melfersi         ###   ########.fr       */
+/*   Created: 2023/11/01 10:06:11 by melfersi          #+#    #+#             */
+/*   Updated: 2023/11/01 10:06:11 by melfersi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	newlist = NULL;
 	temp = newlist;
-	while (lst != NULL)
+	while (lst)
 	{
-		newlist->next = ft_lstnew(f(lst->content));
-		if (newlist == NULL)
+		temp = ft_lstnew(f(lst->content));
+		if (temp == NULL)
 		{
 			ft_lstclear(&newlist, del);
 			return (NULL);
 		}
-		newlist = newlist->next;
+		ft_lstadd_back(&newlist, temp);
 		lst = lst->next;
 	}
-	return (temp->next);
+	return (newlist);
 }
