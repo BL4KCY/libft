@@ -3,8 +3,6 @@
 - [Table of Contents](#table-of-contents)
 - [0. Description](#0-description)
 - [1. Libc functions](#1-libc-functions)
-- [2. Additional functions](#2-additional-functions)
-- [Testers](#testers)
 
 # 0. Description
 
